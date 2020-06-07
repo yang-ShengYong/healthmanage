@@ -18,14 +18,13 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String login(@RequestBody User user) {
-        System.out.println(user);
         User userRes = userDao.getUserByMessage(user.getUsername(), user.getPassword());
         Map<String, Object> res = new HashMap<>();
-        String flag = "error";
+        String status = "error";
         if (userRes != null) {
-            flag = "ok";
+            status = "ok";
         }
-        res.put("flag", flag);
+        res.put("status", status);
         res.put("user", user);
         String resJson = JSON.toJSONString(res);
         return resJson;
